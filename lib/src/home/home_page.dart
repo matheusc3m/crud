@@ -24,16 +24,14 @@ class _HomePageState extends State<HomePage> {
         currentIndex: page,
         onTap: (int index) {
           setState(() {
-            setState(() {
-              page = index;
-            });
-
-            _controller.animateToPage(
-              index,
-              curve: Curves.fastOutSlowIn,
-              duration: const Duration(milliseconds: 400),
-            );
+            page = index;
           });
+
+          _controller.animateToPage(
+            index,
+            curve: Curves.fastOutSlowIn,
+            duration: const Duration(milliseconds: 400),
+          );
         },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
