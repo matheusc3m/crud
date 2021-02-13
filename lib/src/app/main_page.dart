@@ -1,20 +1,26 @@
-import 'package:crud/src/home/character_page.dart';
+import 'package:crud/src/app/home_page.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+import 'character_page.dart';
+
+class MainPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage> {
   int page = 0;
   PageController _controller = PageController(
     initialPage: 0,
   );
-  final List<Widget> _screens = [Text("Bem vindo!"), CharacterPage()];
+  final List<Widget> _screens = [HomePage(), CharacterPage()];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Bem vindo!"),
+      ),
       body: PageView(
           pageSnapping: false,
           physics: NeverScrollableScrollPhysics(),

@@ -1,9 +1,9 @@
 import 'package:crud/src/shared/constants.dart';
 
-import 'home_repository.dart';
+import 'app_repository.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
-class HomeRepositoryImpl implements HomeRepository {
+class AppRepositoryImpl implements AppRepository {
   final _client = HasuraConnect(HASURA_URL);
 
   @override
@@ -20,6 +20,7 @@ class HomeRepositoryImpl implements HomeRepository {
 
     return (response['data']['characters'] as List)
         .map((e) => {
+              "id": e['id'],
               "name": e['name'],
               "age": e['age'],
             })
@@ -36,6 +37,31 @@ class HomeRepositoryImpl implements HomeRepository {
     }
   }
 }
+    ''');
+  }
+
+  @override
+  Future updateCharacters(int id, String name, int age) async {
+    return await _client.mutation('''
+   mutation MyMutation {
+  update_characters(where: {id: {_eq: $id}}, _set: {name: "$name", age: $age}) {
+    returning {
+      id
+    }
+  }
+}
+    ''');
+  }
+
+  @override
+  Future deleteCharacters(int id) async {
+    return await _client.mutation('''
+   mutation MyMutation {
+  delete_characters(where: {id: {_eq: $id}}) {
+    affected_rows
+  }
+}
+
     ''');
   }
 }
