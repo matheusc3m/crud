@@ -18,11 +18,47 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        elevation: 2,
+        child: SafeArea(
+          child: Column(
+            children: [
+              Card(
+                  child: InkWell(
+                onTap: () {
+                  _controller.jumpToPage(0);
+                  setState(() {
+                    page = 0;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text("Home"),
+                ),
+              )),
+              Card(
+                  child: InkWell(
+                onTap: () {
+                  _controller.jumpToPage(1);
+                  setState(() {
+                    page = 1;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: ListTile(
+                  leading: Icon(Icons.supervised_user_circle),
+                  title: Text("Personagens"),
+                ),
+              ))
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: Text("Bem vindo!"),
       ),
       body: PageView(
-          pageSnapping: false,
           physics: NeverScrollableScrollPhysics(),
           controller: _controller,
           children: [_screens[0], _screens[1]]),

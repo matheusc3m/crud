@@ -34,8 +34,8 @@ class _DetailCharacterPageState extends State<DetailCharacterPage> {
       body: ListView(
         padding: EdgeInsets.all(10),
         children: <Widget>[
-          _createCard("Nome", "name", nameController),
-          _createCard("Idade", "age", ageController),
+          _customTextField("Nome", "name", nameController),
+          _customTextField("Idade", "age", ageController),
           SizedBox(
             height: 30,
           ),
@@ -103,10 +103,12 @@ class _DetailCharacterPageState extends State<DetailCharacterPage> {
     );
   }
 
-  Widget _createCard(
+  Widget _customTextField(
       String title, String trailing, TextEditingController controller) {
     return Card(
         child: TextField(
+            keyboardType:
+                title == "Idade" ? TextInputType.number : TextInputType.text,
             autofocus: true,
             controller: controller,
             decoration: InputDecoration(
