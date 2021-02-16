@@ -77,7 +77,8 @@ class _MainPageState extends State<MainPage> {
         },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: "Personagens")
+          BottomNavigationBarItem(
+              icon: Icon(Icons.supervised_user_circle), label: "Personagens")
         ],
       ),
     );
